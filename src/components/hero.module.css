@@ -1,0 +1,72 @@
+.glass {
+  @apply bg-white/10 backdrop-blur-md border border-white/10;
+}
+/* hero section */
+.hero {
+  @apply grid md:grid-cols-2 gap-8 items-center py-12 pt-28;
+  padding-top: 80px; /* header offset */
+}
+
+/* left column */
+.hero-title {
+  @apply text-4xl md:text-5xl font-extrabold leading-tight;
+}
+.hero-desc {
+  @apply mt-4 text-slate-300 max-w-lg;
+}
+.hero-btn-row {
+  @apply mt-6 flex gap-3;
+}
+.hero-btn-main {
+  @apply px-5 py-3 rounded-md bg-emerald-500 hover:bg-emerald-400 text-black font-medium;
+}
+.hero-btn-alt {
+  @apply px-5 py-3 rounded-md border border-slate-600 text-slate-200;
+}
+.hero-features {
+  @apply mt-8 grid grid-cols-3 gap-3 max-w-sm;
+}
+.hero-feature {
+  @apply glass p-3 rounded-lg text-center;
+}
+.hero-feature-title {
+  @apply text-xl font-semibold;
+}
+.hero-feature-desc {
+  @apply text-xs text-slate-400 mt-1;
+}
+
+/* right column */
+.hero-card-wrap {
+  @apply relative;
+}
+.hero-card {
+  @apply w-full h-72 bg-gradient-to-tr from-slate-800 to-slate-700 rounded-2xl glass p-6 flex flex-col justify-between;
+}
+.hero-card-header {
+  @apply flex items-start justify-between;
+}
+.hero-card-meta {
+  @apply text-slate-300 text-sm;
+}
+.hero-card-title {
+  @apply text-white font-semibold text-lg mt-1;
+}
+.hero-card-desc {
+  @apply text-xs text-slate-400 mt-2;
+}
+.hero-card-year {
+  @apply text-xs text-slate-400;
+}
+.hero-card-footer {
+  @apply flex items-center gap-3;
+}
+.hero-card-icon {
+  @apply w-12 h-12 rounded-md bg-[#0b1220] flex items-center justify-center;
+}
+.hero-card-note {
+  @apply text-xs text-slate-400;
+}
+.hero-card-bg {
+  @apply absolute -bottom-6 -right-6 w-36 h-36 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-400 opacity-20 blur-2xl;
+}

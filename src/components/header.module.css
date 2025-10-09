@@ -1,0 +1,81 @@
+/* container */
+
+/* container */
+.container {
+  @apply py-2 px-4 flex items-center justify-between relative;
+  @apply bg-black/40 backdrop-blur-md border border-white/20 shadow-2xl;
+  @apply fixed top-0 left-0 w-full z-50;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), 0 1.5px 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* logo */
+.logo-link {
+  @apply flex items-center gap-3;
+}
+.logo-bg {
+  @apply w-12 h-12 rounded-xl bg-gradient-to-bl from-green-400 to-emerald-600 flex items-center justify-center font-bold text-[#062017];
+}
+.logo-title {
+  @apply text-xl font-semibold;
+}
+.logo-desc {
+  @apply text-xs text-slate-400;
+}
+
+/* nav */
+.navbar {
+  @apply hidden md:flex items-center gap-4 text-sm text-slate-300;
+}
+.nav-link {
+  @apply hover:underline;
+}
+
+/* mobile menu button */
+.menu-btn {
+  @apply md:hidden p-2 rounded-md transition-colors duration-200 focus:outline-none;
+  @apply bg-neutral-950/20 backdrop-blur-md border border-white/20 shadow-lg;
+}
+
+/* burger base */
+.burger {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 5px auto;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 2, 0.3, 1);
+  position: relative;
+}
+
+/* animate to X */
+.menu-btn-open .burger:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.menu-btn-open .burger:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn-open .burger:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* reset when closed */
+.menu-btn-close .burger:nth-child(1),
+.menu-btn-close .burger:nth-child(3) {
+  transform: none;
+}
+.menu-btn-close .burger:nth-child(2) {
+  opacity: 1;
+}
+
+/* mobile menu panel */
+.menu-panel {
+  @apply absolute top-full right-0 mt-2 w-40 rounded-md flex flex-col gap-2 p-4 z-50 md:hidden origin-top-right transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] opacity-0 scale-y-90 translate-x-full pointer-events-none;
+  @apply bg-neutral-950/80 backdrop-blur-md border border-white/20 shadow-lg;
+}
+.menu-panel-open {
+  @apply opacity-100 scale-y-100 translate-x-0 pointer-events-auto;
+}
+.menu-panel-link {
+  @apply hover:underline;
+}
