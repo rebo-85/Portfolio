@@ -137,9 +137,7 @@ function initHotbar(): void {
 }
 
 // ---------- Nav highlight ----------
-// A section with its own nav link highlights that link. A section without one
-// (the showcases) inherits the nearest earlier link, so they count as part of
-// the project above them. Sections before the first link (the hero) highlight nothing.
+// Sections before the first nav link (the hero) highlight nothing.
 function initNav(): void {
   if (!hasIO) return;
 
@@ -191,6 +189,28 @@ function initNav(): void {
   );
   sections.forEach((s) => io.observe(s));
   window.addEventListener("scroll", apply, { passive: true });
+}
+
+// Filters are hidden in the server-rendered markup, so no-JS visitors see every card.
+function initFilter(): void {
+  const bar = document.querySelector<HTMLElement>("[data-filter-bar]");
+  if (!bar) return;
+
+  const cards = document.querySelectorAll<HTMLElement>(".project-card");
+  const buttons = bar.querySelectorAll<HTMLButtonElement>("button[data-filter]");
+  bar.hidden = false;
+
+  bar.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest<HTMLButtonElement>("button[data-filter]");
+    if (!button || !bar.contains(button)) return;
+
+    const filter = button.dataset.filter;
+    buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    cards.forEach((card) => {
+      card.hidden = filter !== "all" && card.dataset.kind !== filter;
+    });
+  });
 }
 
 // ---------- Click-to-load YouTube ----------
@@ -301,5 +321,6 @@ initVideos();
 initReveal();
 initHotbar();
 initNav();
+initFilter();
 initYouTube();
 initCopy();

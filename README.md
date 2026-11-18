@@ -1,4 +1,4 @@
-# Henrique Pereira — Minecraft Bedrock Developer
+# ReBo — Minecraft Bedrock Developer
 
 Portfolio for Minecraft Bedrock scripting, gameplay systems, and project work.
 
@@ -7,7 +7,7 @@ Portfolio for Minecraft Bedrock scripting, gameplay systems, and project work.
 ## Stack
 
 - Vite and TypeScript
-- Static HTML rendered from `src/content/site.ts`
+- Static HTML rendered from typed content in `src/content/`
 - GitHub Pages deployment through GitHub Actions
 
 ## Local development
@@ -28,7 +28,8 @@ npm run build
 
 ## Content and media
 
-- Edit portfolio content in `src/content/site.ts`.
+- Edit site-wide content in `src/content/site.ts`.
+- Add or update projects in `src/content/projects/`; register each project in `src/content/projects/index.ts`.
 - Add site-wide styles in `src/styles/`.
 - Store images and video in `public/media/`.
 - The 13 gameplay videos are encoded as silent 720p MP4s with WebP posters.

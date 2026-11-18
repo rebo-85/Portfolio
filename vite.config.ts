@@ -13,7 +13,11 @@ function reboRender(): Plugin {
     },
     handleHotUpdate({ file, server }) {
       const f = file.replace(/\\/g, "/");
-      if (f.includes("/src/content/") || f.endsWith("/src/render.ts")) {
+      if (
+        f.includes("/src/content/") ||
+        f.includes("/src/render/") ||
+        f.endsWith("/src/render.ts")
+      ) {
         server.ws.send({ type: "full-reload" });
         return [];
       }

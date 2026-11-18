@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Components: every class that src/render.ts emits.
+   Components: every class that src/render/ emits.
    Tokens, reset, reveal system and shared keyframes live in base.css.
    Colour comes from --accent / --accent-rgb, so a block recolours itself
    when it carries data-accent="cyan|red|gold|green".
@@ -414,6 +414,46 @@
 }
 .subhead .section-copy {
   max-width: 62ch;
+}
+
+/* ---------- Project cards and filters ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -16px 0 24px;
+}
+.filter-bar[hidden] {
+  display: none;
+}
+.filter-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-dim);
+  font: 0.82rem var(--mono);
+  cursor: pointer;
+}
+.filter-btn[aria-pressed="true"] {
+  border-color: var(--cyan);
+  color: var(--text);
+}
+.project-card .eyebrow {
+  margin-bottom: 8px;
+}
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.card-links .btn {
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+.project-card[hidden] {
+  display: none;
 }
 
 /* Accent bands: showcases recolour themselves, and a few plain sections get an accent too. */
