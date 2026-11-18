@@ -1,0 +1,10 @@
+/* ---------- Section rhythm ---------- */
+.section-head {
+  margin-bottom: 40px;
+}
+.subhead {
+  margin: 56px 0 28px;
+}
+.subhead .section-copy {
+  max-width: 62ch;
+}

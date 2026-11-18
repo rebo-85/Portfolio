@@ -1,8 +1,11 @@
-import { image } from "../media";
+import { mediaFor } from "../media";
 import type { Project } from "../types";
+
+const { image } = mediaFor("wind-armor-pack");
 
 export const windArmorPack: Project = {
   id: "wind-armor-pack",
+  category: "minecraft",
   kind: "solo",
   title: "Wind Armor Pack",
   summary: "Custom armor set with Script API abilities and a set bonus.",

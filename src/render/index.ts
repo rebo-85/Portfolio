@@ -1,5 +1,5 @@
-import { site } from "../content/site";
-import type { Site } from "../content/types";
+import { projects, site } from "../content";
+import type { Project, Site } from "../content/types";
 import { esc } from "./helpers";
 import {
   aboutSection,
@@ -10,7 +10,7 @@ import {
   workSection,
 } from "./sections";
 
-export function renderApp(s: Site): string {
+export function renderApp(s: Site, projectList: Project[]): string {
   const nav: [string, string][] = [
     ["About", "about"],
     ["Projects", "projects"],
@@ -37,7 +37,7 @@ export function renderApp(s: Site): string {
   <main id="main">
     ${heroSection(s)}
     ${aboutSection(s)}
-    ${projectsSection(s.projects)}
+    ${projectsSection(projectList)}
     ${workSection(s)}
     ${skillsSection(s)}
     ${contactSection(s)}
@@ -66,7 +66,7 @@ export function renderPage(html: string): string {
     url: esc(site.url),
     ogImage: esc(new URL(site.ogImage, site.url).href),
     jsonld,
-    app: renderApp(site),
+    app: renderApp(site, projects),
   };
   return html.replace(/\{\{(\w+)\}\}/g, (_, k: string) => values[k] ?? "");
 }

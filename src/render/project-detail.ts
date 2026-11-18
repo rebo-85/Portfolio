@@ -1,7 +1,7 @@
+import { KINDS } from "../content/taxonomy";
 import type { Project, ProjectPanel } from "../content/types";
 import { head, pills, rich, rv, esc } from "./helpers";
 import { media } from "./media";
-import { KIND_LABEL } from "./project-card";
 
 const clip = (title: string, text: string, clipMedia: Project["cover"], i: number): string => `
         <article ${rv("clip", i % 3, "zoom")}>
@@ -45,7 +45,7 @@ export const projectDetail = (project: Project): string => {
 
   return `
     <section class="showcase" id="${esc(project.id)}" data-accent="${project.accent}" aria-labelledby="${esc(project.id)}-title">
-      <div class="wrap">${head(project.id, detail.kicker ?? `${KIND_LABEL[project.kind]} case study`, project.title, detail.intro)}
+      <div class="wrap">${head(project.id, detail.kicker ?? `${KINDS[project.kind].label} case study`, project.title, detail.intro)}
         <ul ${rv("tags", 3)}>${pills(project.tags)}</ul>
         ${
           detail.clips?.length

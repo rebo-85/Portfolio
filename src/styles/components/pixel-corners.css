@@ -1,0 +1,20 @@
+/* ---------- Shared pixel corners (the same motif as the buttons) ---------- */
+.console,
+.panel,
+.skill-group {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent 40%), var(--surface);
+}
+.console::before,
+.panel::before,
+.skill-group::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}

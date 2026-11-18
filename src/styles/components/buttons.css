@@ -1,0 +1,72 @@
+/* ---------- Buttons ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: 800 1rem var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--cyan);
+}
+.btn::before {
+  top: -1px;
+  left: -1px;
+}
+.btn::after {
+  right: -1px;
+  bottom: -1px;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  border-color: var(--cyan);
+  box-shadow: 4px 4px 0 var(--cyan-deep);
+}
+.btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.btn.primary {
+  border-color: var(--cyan);
+  background: var(--cyan);
+  color: var(--ink);
+}
+.btn.primary::before,
+.btn.primary::after {
+  background: var(--ink);
+}
+.btn code {
+  padding: 0;
+  background: none;
+  color: var(--cyan);
+}
+.btn.copied {
+  border-color: var(--green);
+}
+.btn.copied code {
+  color: var(--green);
+}

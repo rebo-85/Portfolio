@@ -1,0 +1,71 @@
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .hero-stage,
+  .about-grid,
+  .panel-grid,
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-stage {
+    gap: 40px;
+  }
+  .about-grid {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav-inner {
+    height: 64px;
+  }
+  .nav-links li:not(:last-child) {
+    display: none;
+  }
+  .hero {
+    padding: 56px 0 48px;
+  }
+  .deliverables,
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+  .hotbar {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+  }
+  .slot {
+    aspect-ratio: 5 / 3;
+  }
+  .slot-label {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand-text small {
+    display: none;
+  }
+  .pack-preview {
+    grid-template-columns: 1fr;
+  }
+  .pack-icon {
+    max-width: 132px;
+  }
+  .asset-strip {
+    grid-template-columns: 1fr;
+  }
+  .fact {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .clip-grid,
+  .clip-grid:has(> :nth-child(4):last-child) {
+    grid-template-columns: 1fr;
+  }
+  .actions .btn {
+    flex: 1 1 100%;
+  }
+  .panel,
+  .skill-group {
+    padding: 20px;
+  }
+}

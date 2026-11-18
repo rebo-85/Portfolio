@@ -1,0 +1,70 @@
+/* ---------- YouTube (click to load) ---------- */
+.video-block {
+  margin-top: 64px;
+}
+.yt {
+  position: relative;
+  overflow: hidden;
+  max-width: 880px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  background: #05080b;
+}
+.yt-play {
+  position: absolute;
+  inset: 0;
+  display: block;
+  text-decoration: none;
+}
+.yt-play img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition:
+    opacity 0.3s ease,
+    transform 0.6s var(--ease);
+}
+.yt-play:hover img {
+  opacity: 1;
+  transform: scale(1.03);
+}
+.yt-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 76px;
+  height: 76px;
+  border: 2px solid var(--text);
+  background: rgb(7 16 22 / 0.8);
+  box-shadow: 0 0 32px rgb(var(--cyan-rgb) / 0.5);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease-spring);
+}
+.yt-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent var(--cyan);
+  transform: translate(-50%, -50%);
+}
+.yt-play:hover .yt-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.yt-label {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 28px 18px 14px;
+  background: linear-gradient(180deg, transparent, rgb(5 8 11 / 0.9));
+  font: 0.85rem var(--mono);
+}
+.yt iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

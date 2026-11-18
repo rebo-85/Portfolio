@@ -1,0 +1,43 @@
+/* ---------- Tags and pills ---------- */
+.tags,
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tags {
+  margin-top: 16px;
+}
+.tag {
+  padding: 3px 11px;
+  border: 1px solid rgb(var(--accent-rgb) / 0.3);
+  background: rgb(var(--accent-rgb) / 0.07);
+  color: var(--text-dim);
+  font: 0.8rem var(--mono);
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  background: rgb(255 255 255 / 0.02);
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+.pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+}
+.pill.core {
+  border-color: rgb(var(--accent-rgb) / 0.55);
+  background: rgb(var(--accent-rgb) / 0.1);
+  color: var(--text);
+  font-weight: 600;
+}
+.pill.core::before {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgb(var(--accent-rgb) / 0.8);
+}

@@ -1,0 +1,45 @@
+/* ---------- Terminal ---------- */
+.terminal {
+  overflow: hidden;
+  margin-top: 22px;
+  border: 1px solid var(--line-soft);
+  background: #070b10;
+  font-family: var(--mono);
+}
+.term-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.term-bar span {
+  width: 9px;
+  height: 9px;
+  background: var(--line);
+}
+.term-bar span:first-child {
+  background: var(--red);
+}
+.term-bar span:nth-child(2) {
+  background: var(--gold);
+}
+.term-bar span:nth-child(3) {
+  background: var(--green);
+}
+.terminal dl {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-size: 0.82rem;
+}
+.term-line dt {
+  color: var(--green);
+}
+.term-line dt::before {
+  content: "$ ";
+  color: var(--text-muted);
+}
+.term-line dd {
+  padding-left: 1.4em;
+  color: var(--text-dim);
+}

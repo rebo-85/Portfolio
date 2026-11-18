@@ -1,3 +1,5 @@
+import type { Accent, Category, LinkKind, ProjectKind } from "./taxonomy";
+
 export interface Link {
   label: string;
   href: string;
@@ -16,9 +18,7 @@ export interface Clip {
   media: Media;
 }
 
-export type Accent = "cyan" | "red" | "gold" | "green";
-export type ProjectKind = "commercial" | "solo" | "experiment" | "contract";
-export type LinkKind = "curseforge" | "mcpedl" | "github" | "youtube" | "marketplace" | "web";
+export type { Accent, Category, LinkKind, ProjectKind } from "./taxonomy";
 
 export interface ExternalLink {
   kind: LinkKind;
@@ -34,7 +34,9 @@ export interface ProjectPanel {
 }
 
 export interface Project {
+  /** Unique, URL-safe. Also the name of the media folder: public/media/<id>/ */
   id: string;
+  category: Category;
   kind: ProjectKind;
   title: string;
   summary: string;
@@ -104,7 +106,6 @@ export interface Site {
     facts: { label: string; value: string }[];
     paragraphs: string[];
   };
-  projects: Project[];
   work: { kicker: string; title: string; intro: string; panels: WorkPanel[] };
   skills: { kicker: string; title: string; intro: string; groups: SkillGroup[] };
   contact: {

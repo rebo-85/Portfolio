@@ -1,0 +1,79 @@
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgb(11 14 18 / 0.78);
+  backdrop-filter: blur(14px);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 72px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.brand-mark {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 2px;
+  width: 30px;
+  height: 30px;
+}
+.brand-mark span {
+  background: var(--line);
+}
+.brand-mark span:nth-child(1),
+.brand-mark span:nth-child(5),
+.brand-mark span:nth-child(9) {
+  background: var(--cyan);
+}
+.brand-text {
+  line-height: 1.2;
+}
+.brand-text small {
+  display: block;
+  color: var(--text-muted);
+  font: 500 0.7rem var(--mono);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.nav-links a {
+  color: var(--text-dim);
+  font: 0.82rem var(--mono);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover,
+.nav-links a[aria-current="true"] {
+  color: var(--text);
+}
+.nav-links a[aria-current="true"]:not(.nav-cta) {
+  text-decoration: underline;
+  text-decoration-color: var(--cyan);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+.nav-links .nav-cta {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+.nav-links .nav-cta:hover {
+  border-color: var(--cyan);
+}

@@ -1,0 +1,32 @@
+/* ---------- About ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 64px;
+}
+.facts {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+.fact {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--surface);
+}
+.fact dt {
+  color: var(--text-muted);
+  font: 0.8rem var(--mono);
+}
+.fact dd {
+  color: var(--text);
+  font-weight: 600;
+}
+.about-text {
+  color: var(--text-dim);
+  font-size: 1.06rem;
+}

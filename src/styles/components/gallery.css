@@ -1,0 +1,17 @@
+/* ---------- Gallery ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin-top: 24px;
+}
+.shot {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #05080b;
+}
+.shot img {
+  width: 100%;
+  height: auto;
+}

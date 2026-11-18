@@ -1,0 +1,16 @@
+/* ---------- Footer ---------- */
+footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--line-soft);
+  color: var(--text-muted);
+  font: 0.8rem var(--mono);
+}
+footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+footer p + p {
+  margin-top: 0;
+}

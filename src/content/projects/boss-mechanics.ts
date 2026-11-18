@@ -1,8 +1,11 @@
-import { video } from "../media";
+import { mediaFor } from "../media";
 import type { Project } from "../types";
+
+const { video } = mediaFor("boss-mechanics");
 
 export const bossMechanics: Project = {
   id: "boss-mechanics",
+  category: "minecraft",
   kind: "experiment",
   title: "Boss Mechanics",
   summary:

@@ -1,0 +1,8 @@
+/* ---------- Contact ---------- */
+.contact {
+  border-top: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgb(var(--accent-rgb) / 0.06), transparent 60%);
+}
+.contact .section-title {
+  max-width: 820px;
+}

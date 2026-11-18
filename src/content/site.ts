@@ -1,6 +1,9 @@
-import { image, video } from "./media";
-import { projects } from "./projects";
+import { mediaFor } from "./media";
 import type { Site } from "./types";
+
+const siteMedia = mediaFor("site");
+const draconian = mediaFor("draconian");
+const windArmor = mediaFor("wind-armor-pack");
 
 export const site: Site = {
   lang: "en",
@@ -49,15 +52,18 @@ export const site: Site = {
       version: "@minecraft/server 2.0.0",
       title: "Draconian Project",
       text: "Late-stage commercial Bedrock add-on with custom dragons, progression systems, combat, quests and guided player flow.",
-      icon: image("draconian-bp-pack-icon.png", "Draconian behavior pack icon"),
+      icon: draconian.image("draconian-bp-pack-icon.png", "Draconian behavior pack icon"),
       stats: [
         { strong: "Scripted gameplay", rest: "and custom items" },
         { strong: "Shops and", rest: "progression" },
         { strong: "UI and", rest: "VFX" },
       ],
       assets: [
-        { media: image("dragon-menu.png", "Dragon shop preview"), caption: "Dragon shop" },
-        { media: image("wind-chestplate-icon.png", "Armor icon"), caption: "Armor set" },
+        {
+          media: draconian.image("dragon-menu.png", "Dragon shop preview"),
+          caption: "Dragon shop",
+        },
+        { media: windArmor.image("wind-chestplate-icon.png", "Armor icon"), caption: "Armor set" },
       ],
     },
   },
@@ -75,8 +81,6 @@ export const site: Site = {
       "In Minecraft Bedrock, I work with **Script API, entity behavior files, resource packs, UI assets and gameplay configuration**. I also use **Regolith generators** for pack automation and general workflow improvements.",
     ],
   },
-
-  projects,
 
   work: {
     kicker: "Additional work",
@@ -97,7 +101,7 @@ export const site: Site = {
           "UI Integration",
           "Gameplay UI",
         ],
-        media: video("load", "Custom loading screen with progress bar"),
+        media: siteMedia.video("load", "Custom loading screen with progress bar"),
         mediaNote:
           "Implementation and integration contribution. Visual assets were created by the project's art/UI team.",
       },
