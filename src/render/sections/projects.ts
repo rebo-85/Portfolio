@@ -1,5 +1,6 @@
 import { CATEGORIES, sortedKeys } from "../../content/taxonomy";
 import type { Project } from "../../content/types";
+import { demoBlock } from "../demo-block";
 import { head } from "../helpers";
 import { projectCard } from "../project-card";
 import { projectDetail } from "../project-detail";
@@ -31,10 +32,12 @@ const grid = (list: Project[]): string =>
   `<div class="clip-grid project-grid">${list.map((project, i) => projectCard(project, i)).join("")}</div>`;
 
 export const projectsSection = (projects: Project[]): string => {
-  // Feature demos get their own section; everything else stays under "Projects".
+  // Feature demos get their own section and are shown in full there (no card, no
+  // separate case study). Everything else is a card plus a case study under "Projects".
+  // The case studies are rendered as plain sections so the page works without JS; with JS
+  // (behaviors/case-study.ts) they stay hidden and open in an overlay from their card.
   const main = projects.filter((p) => p.kind !== "feature").sort(byFeatured);
   const demos = projects.filter((p) => p.kind === "feature").sort(byFeatured);
-  const caseStudies = [...main, ...demos];
 
   // Only the category filter is shown: the kind split is now the two sections.
   const filters = filterGroup(
@@ -52,6 +55,7 @@ export const projectsSection = (projects: Project[]): string => {
         ${grid(main)}
       </div>
     </section>
+    <div id="case-studies">${main.map(projectDetail).join("")}</div>
     ${
       demos.length
         ? `<section id="feature-demos" aria-labelledby="feature-demos-title">
@@ -62,10 +66,9 @@ export const projectsSection = (projects: Project[]): string => {
           "Feature demos",
           "Standalone systems that show the kind of features I can implement in your project.",
         )}
-        ${grid(demos)}
+        <div class="demo-list">${demos.map(demoBlock).join("")}</div>
       </div>
     </section>`
         : ""
-    }
-    <div id="case-studies">${caseStudies.map(projectDetail).join("")}</div>`;
+    }`;
 };

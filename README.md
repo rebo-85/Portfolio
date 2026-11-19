@@ -62,7 +62,8 @@ src/
     index.ts            page layout: nav, sections order, footer, SEO tags
     sections/           hero, about, projects, work, skills, contact
     project-card.ts     the card in the project grid
-    project-detail.ts   the full case-study section for a project
+    project-detail.ts   the full case-study section for a project (and the shared clips/panel body)
+    demo-block.ts       a feature demo, shown in full inside the Feature demos section
     media.ts, helpers.ts
   behaviors/          ← browser-only JavaScript, one file per feature
   styles/             ← CSS (base.css + components/*.css)
@@ -103,17 +104,17 @@ In most text fields, `**bold**` and `` `code` `` work. Everything else is escape
 
 Both work the same way. The only difference is **where the files go** and the project's `kind`.
 
-|              | Portfolio project                  | Feature demo                                                        |
-| ------------ | ---------------------------------- | ------------------------------------------------------------------- |
-| Content file | `src/content/projects/<id>.ts`     | `src/content/demos/<id>.ts`                                         |
-| Register in  | `src/content/projects/index.ts`    | `src/content/demos/index.ts`                                        |
-| Media folder | `public/media/projects/<id>/`      | `public/media/demos/<id>/`                                          |
-| `kind`       | `commercial`, `solo` or `contract` | **`feature`** (this is what puts it in the "Feature demos" section) |
+|              | Portfolio project                  | Feature demo                                                |
+| ------------ | ---------------------------------- | ----------------------------------------------------------- |
+| Content file | `src/content/projects/<id>.ts`     | `src/content/demos/<id>.ts`                                 |
+| Register in  | `src/content/projects/index.ts`    | `src/content/demos/index.ts`                                |
+| Media folder | `public/media/projects/<id>/`      | `public/media/demos/<id>/`                                  |
+| `kind`       | `commercial`, `solo` or `contract` | **`feature`** (this puts it in the "Feature demos" section) |
 
 Steps:
 
 1. **Prepare media** (optional, see [Media](#media)). Put files in the media folder from the table.
-2. **Create the content file.** The simplest way is to copy `wind-armor-pack.ts` for a minimal card, or `demos/boss-mechanics.ts` for a full case study.
+2. **Create the content file.** The simplest way is to copy `wind-armor-pack.ts` for a minimal card, or `demos/boss-mechanics.ts` for a demo with clips.
 
    ```ts
    import { mediaFor } from "../media";
@@ -140,20 +141,25 @@ Steps:
 
 ### Project fields
 
-| Field                               | Required | Notes                                                                                                                                                                                                                     |
-| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                | yes      | Lowercase kebab-case. Becomes the URL anchor `#<id>` and the last part of the media folder. Must not be one of: `top`, `main`, `hero`, `about`, `projects`, `feature-demos`, `case-studies`, `work`, `skills`, `contact`. |
-| `category`, `kind`, `accent`        | yes      | Must exist in `taxonomy.ts`. `kind: "feature"` places the project in the Feature demos section.                                                                                                                           |
-| `title`, `summary`, `tags`, `cover` | yes      | Card shows the first 4 tags.                                                                                                                                                                                              |
-| `year`                              | no       | Shown next to the kind label on the card.                                                                                                                                                                                 |
-| `links`                             | no       | External buttons, e.g. `{ kind: "github", href: "https://…" }`. Optional custom `label`.                                                                                                                                  |
-| `featured`                          | no       | `true` sorts the project to the top of its section.                                                                                                                                                                       |
-| `status`                            | no       | Stored in the data but **not currently displayed** anywhere.                                                                                                                                                              |
-| `detail`                            | no       | If present, the card gets a **Case study** button and a full section is rendered. If absent, you only get the card.                                                                                                       |
+| Field                               | Required | Notes                                                                                                                                                                                                                                    |
+| ----------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                | yes      | Lowercase kebab-case. Becomes the URL anchor `#<id>` and the last part of the media folder. Must not be one of: `top`, `main`, `hero`, `about`, `projects`, `feature-demos`, `case-studies`, `work`, `skills`, `contact`.                |
+| `category`, `kind`, `accent`        | yes      | Must exist in `taxonomy.ts`. `kind: "feature"` places the project in the Feature demos section.                                                                                                                                          |
+| `title`, `summary`, `tags`, `cover` | yes      | Card shows the first 4 tags. For feature demos there is no card, so all tags show once in the demo header and `cover` is not displayed (it is still required and checked).                                                               |
+| `year`                              | no       | Shown next to the kind label on the card.                                                                                                                                                                                                |
+| `links`                             | no       | External buttons, e.g. `{ kind: "github", href: "https://…" }`. Optional custom `label`.                                                                                                                                                 |
+| `featured`                          | no       | `true` sorts the project to the top of its section.                                                                                                                                                                                      |
+| `status`                            | no       | Stored in the data but **not currently displayed** anywhere.                                                                                                                                                                             |
+| `detail`                            | no       | Projects: the card gets a **Case study** button and a full section is rendered; if absent you only get the card. Feature demos: the `detail` content is shown inline in the demo block; if absent, the demo shows its summary and cover. |
+
+### How the page lays out projects
+
+- **Projects** section: a card for each project, followed by a full case study section for each one that has `detail`. The card does not repeat in the case study (tags appear on the card only).
+- **Feature demos** section (`kind: "feature"`): each demo appears once, as a block with its title, intro, tags and clips. There is no card and no separate case study.
 
 ### Case study (`detail`) options
 
-All optional except `intro`. Sections render in this order:
+All optional except `intro`. Sections render in this order (feature demos skip the "Highlights" heading above the clips):
 
 1. `kicker` and `intro` — heading text (supports `**bold**`)
 2. `clipsKicker`, `clipsIntro`, `clips[]` — grid of `{ title, text, media }`
@@ -218,16 +224,17 @@ In `npm run dev` problems are warnings so a half-finished project never blocks y
 
 ## Behaviours (`src/behaviors/`)
 
-| File         | What it does                                                                                   |
-| ------------ | ---------------------------------------------------------------------------------------------- |
-| `video.ts`   | Lazy-loads and plays/pauses videos based on visibility                                         |
-| `reveal.ts`  | Scroll-in animations for anything with the `.reveal` class                                     |
-| `hotbar.ts`  | Cycles the selected slot in the hero hotbar (pauses on hover, focus, off-screen or hidden tab) |
-| `nav.ts`     | Highlights the current section in the nav while scrolling                                      |
-| `filter.ts`  | Category / kind filter buttons for project cards                                               |
-| `youtube.ts` | Swaps the thumbnail for an embedded player on click (privacy-friendly `youtube-nocookie`)      |
-| `copy.ts`    | Click-to-copy for the Discord handle, with a legacy fallback                                   |
-| `env.ts`     | Shared flags for reduced motion and IntersectionObserver support                               |
+| File            | What it does                                                                                   |
+| --------------- | ---------------------------------------------------------------------------------------------- |
+| `video.ts`      | Lazy-loads and plays/pauses videos based on visibility                                         |
+| `reveal.ts`     | Scroll-in animations for anything with the `.reveal` class                                     |
+| `hotbar.ts`     | Cycles the selected slot in the hero hotbar (pauses on hover, focus, off-screen or hidden tab) |
+| `nav.ts`        | Highlights the current section in the nav while scrolling                                      |
+| `filter.ts`     | Category / kind filter buttons for project cards                                               |
+| `case-study.ts` | Opens a project's case study in an overlay from its card (URL hash, Back and Esc close it)     |
+| `youtube.ts`    | Swaps the thumbnail for an embedded player on click (privacy-friendly `youtube-nocookie`)      |
+| `copy.ts`       | Click-to-copy for the Discord handle, with a legacy fallback                                   |
+| `env.ts`        | Shared flags for reduced motion and IntersectionObserver support                               |
 
 None of them hold content. They only enhance markup that the render step already produced.
 

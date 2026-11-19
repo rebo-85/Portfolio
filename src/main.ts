@@ -1,5 +1,6 @@
 import "./styles/base.css";
 import "./styles/components.css";
+import { initCaseStudies } from "./behaviors/case-study";
 import { initCopy } from "./behaviors/copy";
 import { initFilter } from "./behaviors/filter";
 import { initHotbar } from "./behaviors/hotbar";
@@ -23,5 +24,6 @@ initReveal();
 initHotbar();
 initNav();
 initFilter();
+initCaseStudies();
 initYouTube();
 initCopy();

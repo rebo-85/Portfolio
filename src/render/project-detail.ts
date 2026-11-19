@@ -30,7 +30,7 @@ const projectPanel = (panel: ProjectPanel): string => `
         <div ${rv("panel")}>
           <h3>${esc(panel.title)}</h3>
           <p>${rich(panel.text)}</p>
-          <ul class="tags">${pills(panel.tags)}</ul>
+          ${panel.tags.length ? `<ul class="tags">${pills(panel.tags)}</ul>` : ""}
           <dl class="deliverables">${panel.deliverables
             .map(
               (d, i) =>
@@ -39,20 +39,26 @@ const projectPanel = (panel: ProjectPanel): string => `
             .join("")}</dl>
         </div>`;
 
-export const projectDetail = (project: Project): string => {
+/**
+ * The media-heavy part of a project's detail: clips, YouTube, panel, gallery.
+ * Shared by the full case study below and by the inline feature-demo blocks.
+ * `subhead` adds the "Highlights" heading above the clips (case studies only).
+ */
+export const detailBody = (project: Project, subhead: boolean): string => {
   const detail = project.detail;
   if (!detail) return "";
 
   return `
-    <section class="showcase" id="${esc(project.id)}" data-accent="${project.accent}" aria-labelledby="${esc(project.id)}-title">
-      <div class="wrap">${head(project.id, detail.kicker ?? `${KINDS[project.kind].label} case study`, project.title, detail.intro)}
-        <ul ${rv("tags", 3)}>${pills(project.tags)}</ul>
         ${
           detail.clips?.length
-            ? `<div class="subhead">
+            ? `${
+                subhead
+                  ? `<div class="subhead">
                 <p ${rv("eyebrow section-kicker")}>${esc(detail.clipsKicker ?? "Highlights")}</p>
                 ${detail.clipsIntro ? `<p ${rv("section-copy", 1)}>${rich(detail.clipsIntro)}</p>` : ""}
-              </div>${clipGrid(project)}`
+              </div>`
+                  : ""
+              }${clipGrid(project)}`
             : ""
         }
         ${detail.youtube ? youtube(detail.youtube) : ""}
@@ -66,7 +72,17 @@ export const projectDetail = (project: Project): string => {
                 )
                 .join("")}</div>`
             : ""
-        }
+        }`;
+};
+
+/** Full-width case-study section. Tags live on the card, so they are not repeated here. */
+export const projectDetail = (project: Project): string => {
+  const detail = project.detail;
+  if (!detail) return "";
+
+  return `
+    <section class="showcase" id="${esc(project.id)}" data-accent="${project.accent}" aria-labelledby="${esc(project.id)}-title">
+      <div class="wrap">${head(project.id, detail.kicker ?? `${KINDS[project.kind].label} case study`, project.title, detail.intro)}${detailBody(project, true)}
       </div>
     </section>`;
 };

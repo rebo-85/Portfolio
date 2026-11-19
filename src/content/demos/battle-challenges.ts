@@ -20,14 +20,7 @@ export const battleChallenges: Project = {
     panel: {
       title: "Custom UI & Workflow",
       text: "This project was a deep dive into custom component design and automation, from the pixel art to the TSX generators.",
-      tags: [
-        "JSON UI",
-        "Handmade Assets",
-        "Regolith Generators",
-        "Data-driven",
-        "Script API",
-        "Pixel Art",
-      ],
+      tags: [],
       deliverables: [
         {
           label: "HUD Integration",

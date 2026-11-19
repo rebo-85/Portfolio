@@ -43,8 +43,36 @@
   padding: 8px 14px;
   font-size: 0.9rem;
 }
-.project-card[hidden] {
+.project-card[hidden],
+.demo[hidden] {
   display: none;
+}
+
+/* ---------- Feature demos (shown in full, one block per demo) ---------- */
+.demo-list {
+  display: grid;
+  gap: 72px;
+}
+.demo {
+  padding-top: 32px;
+  border-top: 1px solid rgb(var(--accent-rgb) / 0.25);
+}
+.demo-head {
+  margin-bottom: 28px;
+}
+.demo-head .section-copy {
+  max-width: 62ch;
+}
+.demo-title {
+  margin: 4px 0 12px;
+  font-size: 1.6rem;
+}
+.demo-head .tags {
+  margin-top: 16px;
+}
+.demo-body {
+  display: grid;
+  gap: 28px;
 }
 
 /* Accent bands: showcases recolour themselves, and a few plain sections get an accent too. */

@@ -9,7 +9,7 @@ export const itemPhysics: Project = {
   kind: "commercial",
   title: "Item Physics",
   summary:
-    "Transform your Minecraft experience with satisfying item physics  — because the little details make every adventure feel legendary.",
+    "Transform your Minecraft experience with satisfying item physics — because the little details make every adventure feel legendary.",
   status: "released",
   accent: "cyan",
   tags: ["Script API", "JavaScript", "Behavior pack", "Entity logic", "QA fixes"],
@@ -17,28 +17,28 @@ export const itemPhysics: Project = {
   featured: true,
   detail: {
     intro:
-      "I joined the project mid-production to help stabilize it. My daily work here is strictly **Bedrock scripting, tracking down bugs, and wiring up gameplay systems** across behavior and resource packs so everything feels solid in-game.",
-    clipsKicker: "Gameplay highlights",
-    clipsIntro: "Here's how some of the code I worked on actually looks in-game.",
+      "A physics add-on that makes the world react: dropped items bounce and roll, trees topple, and entities and block debris tumble. The effects are driven by **Bedrock scripting** on top of behavior and resource packs.",
+    clipsKicker: "Physics in action",
+    clipsIntro: "A look at each physics system in-game.",
     clips: [
       {
-        title: "Item Physics",
-        text: "Custom physics for dropped items, making them bounce, roll and collide with the world in a satisfying way.",
+        title: "Dropped Items",
+        text: "Dropped items bounce, roll and settle against the terrain.",
         media: image("image1.png", "Item physics in action"),
       },
       {
         title: "Tree Physics",
-        text: "Scripting logic for falling trees, making sure they break into logs and leaves in a satisfying way.",
+        text: "Felled trees topple and break apart into logs and leaves.",
         media: image("image2.png", "Tree physics in action"),
       },
       {
         title: "Entity Physics",
-        text: "Scripting logic for falling entities, making sure they interact with the world in a satisfying way.",
+        text: "Falling entities react to the ground and blocks they land on.",
         media: image("image3.png", "Entity physics in action"),
       },
       {
         title: "Block Debris Physics",
-        text: "Scripting logic for falling block debris, making sure they interact with the world in a satisfying way.",
+        text: "Falling block debris tumbles and settles around the impact.",
         media: image("image4.png", "Block debris physics in action"),
       },
     ],
