@@ -1,12 +1,12 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { image } = mediaFor("battle-challenges");
+const { image } = mediaFor("demos/battle-challenges");
 
 export const battleChallenges: Project = {
   id: "battle-challenges",
   category: "minecraft",
-  kind: "experiment",
+  kind: "feature",
   title: "Battle Challenges",
   summary:
     "A data-driven challenge system exploring custom Bedrock JSON UI and Script API integration.",
@@ -14,9 +14,9 @@ export const battleChallenges: Project = {
   tags: ["JSON UI", "Regolith", "Script API", "Pixel Art"],
   cover: image("hud-preview.png", "Real-time HUD showing mission progress"),
   detail: {
-    kicker: "Experimental System",
+    kicker: "Custom UI System",
     intro:
-      "I built this experimental system to push the limits of Bedrock's JSON UI. My goal was to create a custom interface that felt completely unique, breaking away from the standard vanilla look while maintaining a tight integration with the Script API.",
+      "I built this system to push the limits of Bedrock's JSON UI. My goal was to create a custom interface that felt completely unique, breaking away from the standard vanilla look while maintaining a tight integration with the Script API.",
     panel: {
       title: "Custom UI & Workflow",
       text: "This project was a deep dive into custom component design and automation, from the pixel art to the TSX generators.",
@@ -42,8 +42,8 @@ export const battleChallenges: Project = {
           text: "Using generators, I built a data-driven pipeline that makes adding new challenges as simple as editing a config file.",
         },
         {
-          label: "Experimental Logic",
-          text: "A prototype for complex challenge tracking and achievement rewards built as a technical exercise.",
+          label: "Challenge Logic",
+          text: "Challenge tracking and achievement rewards built as a reusable system that can be adapted to other add-ons.",
         },
       ],
     },

@@ -1,7 +1,7 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { image, video } = mediaFor("draconian");
+const { image, video } = mediaFor("projects/draconian");
 
 export const draconian: Project = {
   id: "draconian",

@@ -2,8 +2,8 @@ import { mediaFor } from "./media";
 import type { Site } from "./types";
 
 const siteMedia = mediaFor("site");
-const draconian = mediaFor("draconian");
-const windArmor = mediaFor("wind-armor-pack");
+const draconian = mediaFor("projects/draconian");
+const windArmor = mediaFor("projects/wind-armor-pack");
 
 export const site: Site = {
   lang: "en",
@@ -74,7 +74,7 @@ export const site: Site = {
     facts: [
       { label: "Role", value: "Script Developer" },
       { label: "Stack", value: "JavaScript / TypeScript / JSON" },
-      { label: "Language", value: "PT-BR native / EN intermediate" },
+      { label: "Language", value: "Tagalog-Filipino native / English intermediate" },
     ],
     paragraphs: [
       "I like figuring out how a system works, where it breaks and what it needs to behave consistently. I also come from production JavaScript and TypeScript work on the web, which helps a lot when I need to read, maintain and clean up larger Bedrock codebases.",
@@ -172,7 +172,7 @@ export const site: Site = {
     text: "Available for scripting, gameplay systems, bug fixing, feature implementation and behavior or resource pack maintenance.",
     email: "catalanmarben@gmail.com",
     discord: "rebo_85",
-    links: [{ label: "GitHub", href: "https://github.com/ReBoVPS" }],
+    links: [{ label: "GitHub", href: "https://github.com/rebo-85" }],
   },
 
   footer: ["Copyright 2026 ReBo.", "Minecraft Bedrock Developer Portfolio"],

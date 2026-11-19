@@ -16,7 +16,7 @@ export const CATEGORIES = {
 export const KINDS = {
   commercial: { label: "Commercial", order: 0 },
   solo: { label: "Solo release", order: 1 },
-  experiment: { label: "Experiment", order: 2 },
+  feature: { label: "Feature demo", order: 2 },
   contract: { label: "Contract", order: 3 },
 } as const;
 

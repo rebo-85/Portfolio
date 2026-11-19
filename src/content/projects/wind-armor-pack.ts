@@ -1,7 +1,7 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { image } = mediaFor("wind-armor-pack");
+const { image } = mediaFor("projects/wind-armor-pack");
 
 export const windArmorPack: Project = {
   id: "wind-armor-pack",
