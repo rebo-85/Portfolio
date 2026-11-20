@@ -65,7 +65,7 @@ export const site: Site = {
     kicker: "About me",
     title: "I like taking messy systems and making them feel solid in-game.",
     facts: [
-      { label: "Role", value: "Script Developer" },
+      { label: "Role", value: "Gameplay/Script Developer" },
       { label: "Stack", value: "JavaScript / TypeScript / JSON" },
       { label: "Language", value: "FIL-PH native / EN-US intermediate" },
     ],

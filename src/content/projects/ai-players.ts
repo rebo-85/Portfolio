@@ -12,7 +12,7 @@ export const AIPlayers: Project = {
   year: 2026,
   status: "released",
   accent: "cyan",
-  tags: ["Script API", "JavaScript", "Behavior pack", "Entity logic"],
+  tags: ["Script API", "JavaScript", "Behavior pack", "Entity logic", "Vanilla+"],
   cover: image("pack_icon.png", "AI players icon"),
   detail: {
     intro:

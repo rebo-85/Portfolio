@@ -12,7 +12,15 @@ export const itemPhysics: Project = {
     "Transform your Minecraft experience with satisfying item physics — because the little details make every adventure feel legendary.",
   status: "released",
   accent: "cyan",
-  tags: ["Script API", "JavaScript", "Behavior pack", "Entity logic", "QA fixes"],
+  tags: [
+    "Script API",
+    "JavaScript",
+    "Behavior pack",
+    "Entity logic",
+    "Utility",
+    "Technology",
+    "Vanilla+",
+  ],
   cover: image("cover.png", "Item physics cover image"),
   featured: true,
   detail: {

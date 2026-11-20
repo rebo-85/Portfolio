@@ -16,6 +16,8 @@ export const draconian: Project = {
     "Script API",
     "JavaScript",
     "Behavior pack",
+    "Combat systems",
+    "Progression systems",
     "Entity logic",
     "Custom items",
     "Shop systems",
