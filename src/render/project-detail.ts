@@ -41,24 +41,18 @@ const projectPanel = (panel: ProjectPanel): string => `
 
 /**
  * The media-heavy part of a project's detail: clips, YouTube, panel, gallery.
- * Shared by the full case study below and by the inline feature-demo blocks.
- * `subhead` adds the "Highlights" heading above the clips (case studies only).
  */
-export const detailBody = (project: Project, subhead: boolean): string => {
+const detailBody = (project: Project): string => {
   const detail = project.detail;
   if (!detail) return "";
 
   return `
         ${
           detail.clips?.length
-            ? `${
-                subhead
-                  ? `<div class="subhead">
+            ? `<div class="subhead">
                 <p ${rv("eyebrow section-kicker")}>${esc(detail.clipsKicker ?? "Highlights")}</p>
                 ${detail.clipsIntro ? `<p ${rv("section-copy", 1)}>${rich(detail.clipsIntro)}</p>` : ""}
-              </div>`
-                  : ""
-              }${clipGrid(project)}`
+              </div>${clipGrid(project)}`
             : ""
         }
         ${detail.youtube ? youtube(detail.youtube) : ""}
@@ -75,14 +69,17 @@ export const detailBody = (project: Project, subhead: boolean): string => {
         }`;
 };
 
-/** Full-width case-study section. Tags live on the card, so they are not repeated here. */
+/**
+ * Full-width write-up for a project or feature demo. It is hidden until opened from its card
+ * (see behaviors/project-overlay.ts). Tags live on the card, so they are not repeated here.
+ */
 export const projectDetail = (project: Project): string => {
   const detail = project.detail;
   if (!detail) return "";
 
   return `
     <section class="showcase" id="${esc(project.id)}" data-accent="${project.accent}" aria-labelledby="${esc(project.id)}-title">
-      <div class="wrap">${head(project.id, detail.kicker ?? `${KINDS[project.kind].label} case study`, project.title, detail.intro)}${detailBody(project, true)}
+      <div class="wrap">${head(project.id, detail.kicker ?? (project.kind === "feature" ? "Feature demo" : KINDS[project.kind].label), project.title, detail.intro)}${detailBody(project)}
       </div>
     </section>`;
 };

@@ -9,7 +9,7 @@
 .shot {
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #05080b;
+  background: #040404;
 }
 .shot img {
   width: 100%;

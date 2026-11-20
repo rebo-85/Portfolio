@@ -1,12 +1,12 @@
 import { resetYouTube } from "./youtube";
 
-// ---------- Case-study overlay ----------
-// Case studies are server-rendered as ordinary sections (so the page works without JS).
-// With JS they stay hidden (see case-study.css) and the card's "Case study" link opens
+// ---------- Project overlay ----------
+// Project write-ups and feature demos are server-rendered as ordinary sections (so the page works without JS).
+// With JS they stay hidden (see project-overlay.css) and the card's "View project" / "View demo" link opens
 // one at a time in a modal <dialog>. The URL hash (#<project-id>) is the single source of
 // truth, so links can be shared and the browser Back button closes the overlay.
-export function initCaseStudies(): void {
-  const holder = document.getElementById("case-studies");
+export function initProjectOverlay(): void {
+  const holder = document.getElementById("project-details");
   if (!holder || typeof HTMLDialogElement === "undefined") return;
 
   const studies = new Map<string, HTMLElement>();
@@ -17,7 +17,7 @@ export function initCaseStudies(): void {
   dialog.className = "case-dialog";
   dialog.innerHTML = `
     <div class="case-bar">
-      <button class="btn case-close" type="button">&larr; Back to projects</button>
+      <button class="btn case-close" type="button">&larr; Back</button>
     </div>
     <div class="case-content"></div>`;
   document.body.append(dialog);
@@ -46,7 +46,7 @@ export function initCaseStudies(): void {
     dialog.scrollTop = 0;
   };
 
-  // Moves the open case study back into its hidden holder and stops any video in it.
+  // Moves the open write-up back into its hidden holder and stops any video in it.
   const release = (): void => {
     if (!current) return;
     resetYouTube(current);
@@ -60,7 +60,7 @@ export function initCaseStudies(): void {
     document.documentElement.classList.remove("case-open");
   };
 
-  // Show whichever case study the hash names, or none.
+  // Show whichever write-up the hash names, or none.
   const sync = (): void => {
     const section = studies.get(idFromHash(location.hash));
     if (section) show(section);
@@ -70,14 +70,18 @@ export function initCaseStudies(): void {
   // Closing goes through history so Back and the close button agree. If the visitor
   // arrived straight on a #<id> link there is nothing to go back to, so tidy the URL instead.
   const requestClose = (): void => {
-    const pushedByUs = (history.state as { caseStudy?: string } | null)?.caseStudy;
+    const pushedByUs = (history.state as { projectId?: string } | null)?.projectId;
     if (pushedByUs) {
       history.back(); // popstate -> sync() -> hide()
       return;
     }
-    history.replaceState(null, "", `${location.pathname}${location.search}#projects`);
+    // Land on the section whose card opened it (Projects or Feature demos).
+    const id = current?.id;
+    const card = id ? document.querySelector(`.project-card a[href="#${CSS.escape(id)}"]`) : null;
+    const home = card?.closest("section[id]")?.id ?? "projects";
+    history.replaceState(null, "", `${location.pathname}${location.search}#${home}`);
     hide();
-    document.getElementById("projects")?.scrollIntoView();
+    document.getElementById(home)?.scrollIntoView();
   };
 
   document.addEventListener("click", (event) => {
@@ -88,7 +92,7 @@ export function initCaseStudies(): void {
     const id = a ? idFromHash(a.hash) : "";
     if (!a || !studies.has(id)) return;
     event.preventDefault();
-    if (location.hash !== `#${id}`) history.pushState({ caseStudy: id }, "", `#${id}`);
+    if (location.hash !== `#${id}`) history.pushState({ projectId: id }, "", `#${id}`);
     sync();
   });
 

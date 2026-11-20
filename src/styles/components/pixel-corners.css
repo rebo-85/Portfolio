@@ -17,4 +17,5 @@
   width: 6px;
   height: 6px;
   background: var(--accent);
+  box-shadow: 0 0 6px rgb(var(--accent-rgb) / 0.45);
 }

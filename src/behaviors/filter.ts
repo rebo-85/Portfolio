@@ -1,11 +1,11 @@
 // Filters are hidden in the server-rendered markup, so no-JS visitors see everything.
 // Each group (category, kind) narrows the items independently; an item must match all active groups.
-// Items are the project cards and the inline feature-demo blocks.
+// Items are the project cards, in both the Projects and Feature demos sections.
 export function initFilter(): void {
   const bar = document.querySelector<HTMLElement>("[data-filter-bar]");
   if (!bar) return;
 
-  const cards = document.querySelectorAll<HTMLElement>(".project-card, .demo");
+  const cards = document.querySelectorAll<HTMLElement>(".project-card");
   const active: Record<string, string> = {};
   bar.hidden = false;
 

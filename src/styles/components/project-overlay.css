@@ -1,8 +1,8 @@
-/* ---------- Case-study overlay ----------
-   Without JS the case studies are plain stacked sections. With JS they are hidden
-   until opened from their card; behaviors/case-study.ts moves the open one into the
+/* ---------- Project overlay ----------
+   Without JS the project write-ups are plain stacked sections. With JS they are hidden
+   until opened from their card; behaviors/project-overlay.ts moves the open one into the
    dialog, which is why the hiding rule only matches direct children of the holder. */
-.js #case-studies > .showcase {
+.js #project-details > .showcase {
   display: none;
 }
 
@@ -26,7 +26,7 @@ html.case-open {
   overscroll-behavior: contain;
 }
 .case-dialog::backdrop {
-  background: rgb(5 7 10 / 0.82);
+  background: rgb(4 4 4 / 0.82);
   backdrop-filter: blur(4px);
 }
 .case-bar {

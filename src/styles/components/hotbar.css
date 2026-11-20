@@ -12,7 +12,7 @@
   background: rgb(0 0 0 / 0.45);
   box-shadow:
     var(--shadow),
-    0 0 40px rgb(var(--cyan-rgb) / 0.08);
+    0 0 30px rgb(var(--cyan-rgb) / 0.05);
 }
 .slot {
   position: relative;
@@ -22,8 +22,8 @@
   min-width: 0;
   padding: 4px;
   border: 2px solid;
-  border-color: #3a4552 #10151b #10151b #3a4552;
-  background: #1a2029;
+  border-color: #3a3335 #0c0b0c #0c0b0c #3a3335;
+  background: #151516;
   text-align: center;
   transition:
     transform 0.3s var(--ease-spring),
@@ -46,10 +46,10 @@
 .slot.selected {
   transform: translateY(-6px);
   border-color: var(--text);
-  background: rgb(var(--cyan-rgb) / 0.16);
+  background: rgb(var(--cyan-rgb) / 0.1);
   box-shadow:
-    0 0 0 2px rgb(var(--cyan-rgb) / 0.7),
-    0 0 28px rgb(var(--cyan-rgb) / 0.55);
+    0 0 0 2px rgb(var(--cyan-rgb) / 0.55),
+    0 0 20px rgb(var(--cyan-rgb) / 0.3);
   animation: slot-glow 2.4s ease-in-out infinite;
 }
 .slot.selected .slot-label {
@@ -58,7 +58,7 @@
 @keyframes slot-glow {
   50% {
     box-shadow:
-      0 0 0 2px rgb(var(--cyan-rgb) / 0.95),
-      0 0 40px rgb(var(--cyan-rgb) / 0.8);
+      0 0 0 2px rgb(var(--cyan-rgb) / 0.8),
+      0 0 28px rgb(var(--cyan-rgb) / 0.45);
   }
 }

@@ -3,7 +3,6 @@ import type { Site } from "./types";
 
 const siteMedia = mediaFor("site");
 const draconian = mediaFor("projects/draconian");
-const windArmor = mediaFor("projects/wind-armor-pack");
 
 export const site: Site = {
   lang: "en",
@@ -31,20 +30,15 @@ export const site: Site = {
     title: "Minecraft Bedrock",
     accent: "Developer",
     intro:
-      "I work on Bedrock gameplay systems with **JavaScript, TypeScript, @minecraft/server and JSON configuration**. Most of my work is fixing broken logic, implementing features and making custom gameplay feel stable in-game.",
+      "I build and repair Bedrock gameplay with **@minecraft/server, TypeScript and JSON**. Broken logic, half-finished features, systems that fall apart in-game: I turn them into things that hold up.",
     chips: [
       "Script API focused",
-      "Filipino native",
-      "English intermediate",
+      "TL-PH native",
+      "EN-US intermediate",
       "Private commercial project",
     ],
     actions: [
       { label: "Get in touch", href: "mailto:catalanmarben@gmail.com", primary: true },
-      {
-        label: "Watch Gameplay",
-        href: "https://www.youtube.com/watch?v=mdOrZldcCNc",
-        external: true,
-      },
       { label: "View projects", href: "#projects" },
     ],
     console: {
@@ -55,15 +49,14 @@ export const site: Site = {
       icon: draconian.image("draconian-bp-pack-icon.png", "Draconian behavior pack icon"),
       stats: [
         { strong: "Scripted gameplay", rest: "and custom items" },
-        { strong: "Shops and", rest: "progression" },
-        { strong: "UI and", rest: "VFX" },
+        { strong: "Shops", rest: "and progression" },
+        { strong: "UI", rest: "and VFX" },
       ],
       assets: [
         {
           media: draconian.image("dragon-menu.png", "Dragon shop preview"),
           caption: "Dragon shop",
         },
-        { media: windArmor.image("wind-chestplate-icon.png", "Armor icon"), caption: "Armor set" },
       ],
     },
   },
@@ -74,7 +67,7 @@ export const site: Site = {
     facts: [
       { label: "Role", value: "Script Developer" },
       { label: "Stack", value: "JavaScript / TypeScript / JSON" },
-      { label: "Language", value: "Tagalog-Filipino native / English intermediate" },
+      { label: "Language", value: "FIL-PH native / EN-US intermediate" },
     ],
     paragraphs: [
       "I like figuring out how a system works, where it breaks and what it needs to behave consistently. I also come from production JavaScript and TypeScript work on the web, which helps a lot when I need to read, maintain and clean up larger Bedrock codebases.",
@@ -86,7 +79,7 @@ export const site: Site = {
     kicker: "Additional work",
     title: "Other experience that supports the Bedrock work.",
     intro:
-      "Minecraft is the main focus here. The work below is just supporting background for the way I work with JavaScript, UI and production maintenance.",
+      "Minecraft is my main focus. This is the other work that sharpens it: shipping UI, debugging production code, and maintaining things long-term.",
     panels: [
       {
         title: "Custom Loading Screen System",
@@ -136,7 +129,7 @@ export const site: Site = {
     kicker: "Toolkit",
     title: "What I can help with.",
     intro:
-      "I work best where scripting, JSON configuration and practical debugging meet. I like fixing problems, finishing features and keeping things moving.",
+      "I'm strongest where scripting, JSON and debugging overlap: finding why something breaks, fixing it properly, and finishing what was started.",
     groups: [
       {
         title: "Minecraft Bedrock",
@@ -168,8 +161,8 @@ export const site: Site = {
 
   contact: {
     kicker: "Let's talk",
-    heading: "Available for Minecraft Bedrock scripting and gameplay work.",
-    text: "Available for scripting, gameplay systems, bug fixing, feature implementation and behavior or resource pack maintenance.",
+    heading: "Got a Bedrock project that needs to work properly?",
+    text: "Scripting, gameplay systems, bug fixes, new features, or pack maintenance. Send me a message and tell me what's broken or what you're building.",
     email: "catalanmarben@gmail.com",
     discord: "rebo_85",
     links: [{ label: "GitHub", href: "https://github.com/rebo-85" }],

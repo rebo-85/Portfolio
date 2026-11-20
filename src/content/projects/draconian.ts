@@ -58,10 +58,5 @@ export const draconian: Project = {
         media: video("arena-wave", "Wave arena combat"),
       },
     ],
-    youtube: {
-      kicker: "Video Demonstration",
-      id: "mdOrZldcCNc",
-      title: "Draconian Gameplay Demo",
-    },
   },
 };

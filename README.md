@@ -62,8 +62,7 @@ src/
     index.ts            page layout: nav, sections order, footer, SEO tags
     sections/           hero, about, projects, work, skills, contact
     project-card.ts     the card in the project grid
-    project-detail.ts   the full case-study section for a project (and the shared clips/panel body)
-    demo-block.ts       a feature demo, shown in full inside the Feature demos section
+    project-detail.ts   the full write-up for a project or demo (opened in the overlay) and its clips/panel body
     media.ts, helpers.ts
   behaviors/          ← browser-only JavaScript, one file per feature
   styles/             ← CSS (base.css + components/*.css)
@@ -141,25 +140,33 @@ Steps:
 
 ### Project fields
 
-| Field                               | Required | Notes                                                                                                                                                                                                                                    |
-| ----------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                | yes      | Lowercase kebab-case. Becomes the URL anchor `#<id>` and the last part of the media folder. Must not be one of: `top`, `main`, `hero`, `about`, `projects`, `feature-demos`, `case-studies`, `work`, `skills`, `contact`.                |
-| `category`, `kind`, `accent`        | yes      | Must exist in `taxonomy.ts`. `kind: "feature"` places the project in the Feature demos section.                                                                                                                                          |
-| `title`, `summary`, `tags`, `cover` | yes      | Card shows the first 4 tags. For feature demos there is no card, so all tags show once in the demo header and `cover` is not displayed (it is still required and checked).                                                               |
-| `year`                              | no       | Shown next to the kind label on the card.                                                                                                                                                                                                |
-| `links`                             | no       | External buttons, e.g. `{ kind: "github", href: "https://…" }`. Optional custom `label`.                                                                                                                                                 |
-| `featured`                          | no       | `true` sorts the project to the top of its section.                                                                                                                                                                                      |
-| `status`                            | no       | Stored in the data but **not currently displayed** anywhere.                                                                                                                                                                             |
-| `detail`                            | no       | Projects: the card gets a **Case study** button and a full section is rendered; if absent you only get the card. Feature demos: the `detail` content is shown inline in the demo block; if absent, the demo shows its summary and cover. |
+| Field                               | Required | Notes                                                                                                                                                                                                                        |
+| ----------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                | yes      | Lowercase kebab-case. Becomes the URL anchor `#<id>` and the last part of the media folder. Must not be one of: `top`, `main`, `hero`, `about`, `projects`, `feature-demos`, `project-details`, `work`, `skills`, `contact`. |
+| `category`, `kind`, `accent`        | yes      | Must exist in `taxonomy.ts`. `kind: "feature"` places the project in the Feature demos section.                                                                                                                              |
+| `title`, `summary`, `tags`, `cover` | yes      | Card shows the first 4 tags. Feature demos get a card too (in the Feature demos section), so `cover` is shown on it.                                                                                                         |
+| `year`                              | no       | Shown next to the kind label on the card.                                                                                                                                                                                    |
+| `links`                             | no       | External buttons, e.g. `{ kind: "github", href: "https://…" }`. Optional custom `label`.                                                                                                                                     |
+| `featured`                          | no       | `true` sorts the project to the top of its section.                                                                                                                                                                          |
+| `status`                            | no       | Stored in the data but **not currently displayed** anywhere.                                                                                                                                                                 |
+| `detail`                            | no       | Projects: the card gets a **View project** button and a full section is rendered; if absent you only get the card. Feature demos work the same way: the card gets a **View demo** button; if absent you only get the card.   |
 
 ### How the page lays out projects
 
-- **Projects** section: a card for each project, followed by a full case study section for each one that has `detail`. The card does not repeat in the case study (tags appear on the card only).
-- **Feature demos** section (`kind: "feature"`): each demo appears once, as a block with its title, intro, tags and clips. There is no card and no separate case study.
+- **Projects** section: a card for each project. If it has `detail`, the card's **View project** button opens the full write-up in an overlay. The card does not repeat in the write-up (tags appear on the card only).
+- **Feature demos** section (`kind: "feature"`): each demo is a card, like a project, and its write-up opens in the same overlay from a **View demo** button.
 
-### Case study (`detail`) options
+### How the overlay works
 
-All optional except `intro`. Sections render in this order (feature demos skip the "Highlights" heading above the clips):
+Every write-up is rendered into the page as a normal section (inside `#project-details`), so the site still works without JavaScript: there they simply appear stacked after the cards. With JavaScript they stay hidden, and `src/behaviors/project-overlay.ts` opens one at a time in a modal dialog.
+
+- **Links:** the URL hash is the source of truth. `#<id>` opens that write-up, so a project can be shared by URL, and the browser Back button, **Esc**, the **← Back** button or a click on the backdrop all close it.
+- **Previous / Next:** buttons in the overlay's top bar (and the **←** / **→** keys) step through the cards in the order they appear on the page. Cards hidden by a category filter are skipped. Moving between write-ups does not add history entries, so Back still closes the overlay in one step.
+- **Preloading:** hovering a card link with a mouse, or focusing it with the keyboard, loads that write-up's media early (and the previous and next ones when it opens). Skipped when the browser has Save-Data on; YouTube thumbnails wait until the write-up is actually opened.
+
+### Project write-up (`detail`) options
+
+All optional except `intro`. Sections render in this order:
 
 1. `kicker` and `intro` — heading text (supports `**bold**`)
 2. `clipsKicker`, `clipsIntro`, `clips[]` — grid of `{ title, text, media }`
@@ -224,17 +231,17 @@ In `npm run dev` problems are warnings so a half-finished project never blocks y
 
 ## Behaviours (`src/behaviors/`)
 
-| File            | What it does                                                                                   |
-| --------------- | ---------------------------------------------------------------------------------------------- |
-| `video.ts`      | Lazy-loads and plays/pauses videos based on visibility                                         |
-| `reveal.ts`     | Scroll-in animations for anything with the `.reveal` class                                     |
-| `hotbar.ts`     | Cycles the selected slot in the hero hotbar (pauses on hover, focus, off-screen or hidden tab) |
-| `nav.ts`        | Highlights the current section in the nav while scrolling                                      |
-| `filter.ts`     | Category / kind filter buttons for project cards                                               |
-| `case-study.ts` | Opens a project's case study in an overlay from its card (URL hash, Back and Esc close it)     |
-| `youtube.ts`    | Swaps the thumbnail for an embedded player on click (privacy-friendly `youtube-nocookie`)      |
-| `copy.ts`       | Click-to-copy for the Discord handle, with a legacy fallback                                   |
-| `env.ts`        | Shared flags for reduced motion and IntersectionObserver support                               |
+| File                 | What it does                                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------------ |
+| `video.ts`           | Lazy-loads and plays/pauses videos based on visibility                                                 |
+| `reveal.ts`          | Scroll-in animations for anything with the `.reveal` class                                             |
+| `hotbar.ts`          | Cycles the selected slot in the hero hotbar (pauses on hover, focus, off-screen or hidden tab)         |
+| `nav.ts`             | Highlights the current section in the nav while scrolling                                              |
+| `filter.ts`          | Category / kind filter buttons for project cards                                                       |
+| `project-overlay.ts` | Opens a project's write-up or demo in an overlay: URL hash, Back / Esc, Previous / Next, hover preload |
+| `youtube.ts`         | Swaps the thumbnail for an embedded player on click (privacy-friendly `youtube-nocookie`)              |
+| `copy.ts`            | Click-to-copy for the Discord handle, with a legacy fallback                                           |
+| `env.ts`             | Shared flags for reduced motion and IntersectionObserver support                                       |
 
 None of them hold content. They only enhance markup that the render step already produced.
 
@@ -304,7 +311,8 @@ If you rename the repo or move to a custom domain, update both. A custom domain 
 | Build fails with **"unknown category / kind / accent"**                                       | Typo, or the value isn't in `taxonomy.ts` yet.                                                                                                                  |
 | Build fails with **"Duplicate project id"** or **"clashes with an id the page already uses"** | Pick a different `id`.                                                                                                                                          |
 | Project doesn't appear                                                                        | It isn't registered in `src/content/projects/index.ts` or `src/content/demos/index.ts`.                                                                         |
-| No "Case study" button on a card                                                              | The project has no `detail` object.                                                                                                                             |
+| No "View project" / "View demo" button on a card                                              | The project has no `detail` object.                                                                                                                             |
 | Videos don't play on the live site                                                            | LFS wasn't set up when the MP4s were committed, or the LFS objects weren't pushed.                                                                              |
 | Assets 404 locally                                                                            | Open `http://localhost:<port>/Portfolio/`, not the bare root.                                                                                                   |
 | Dev server doesn't update after editing content                                               | Content and render changes trigger a full reload. Check the terminal for a warning.                                                                             |
+| Every write-up shows stacked on the page instead of opening from its card                     | JavaScript is off, or `src/main.ts` isn't calling `initProjectOverlay()`.                                                                                       |

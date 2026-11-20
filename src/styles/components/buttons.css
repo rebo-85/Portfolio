@@ -44,7 +44,9 @@
 .btn:hover {
   transform: translate(-2px, -2px);
   border-color: var(--cyan);
-  box-shadow: 4px 4px 0 var(--cyan-deep);
+  box-shadow:
+    4px 4px 0 var(--cyan-deep),
+    0 0 14px rgb(var(--cyan-rgb) / 0.18);
 }
 .btn:active {
   transform: translate(0, 0);
@@ -54,6 +56,7 @@
   border-color: var(--cyan);
   background: var(--cyan);
   color: var(--ink);
+  box-shadow: 0 0 12px rgb(var(--cyan-rgb) / 0.25);
 }
 .btn.primary::before,
 .btn.primary::after {

@@ -20,7 +20,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  background: #05080b;
+  background: #040404;
 }
 .clip-media video,
 .clip-media img {

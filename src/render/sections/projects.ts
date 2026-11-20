@@ -1,6 +1,5 @@
 import { CATEGORIES, sortedKeys } from "../../content/taxonomy";
 import type { Project } from "../../content/types";
-import { demoBlock } from "../demo-block";
 import { head } from "../helpers";
 import { projectCard } from "../project-card";
 import { projectDetail } from "../project-detail";
@@ -28,14 +27,14 @@ const filterGroup = <K extends string>(
 const byFeatured = (a: Project, b: Project): number =>
   Number(Boolean(b.featured)) - Number(Boolean(a.featured));
 
-const grid = (list: Project[]): string =>
-  `<div class="clip-grid project-grid">${list.map((project, i) => projectCard(project, i)).join("")}</div>`;
+const grid = (list: Project[], cta?: string): string =>
+  `<div class="clip-grid project-grid">${list.map((project, i) => projectCard(project, i, cta)).join("")}</div>`;
 
 export const projectsSection = (projects: Project[]): string => {
-  // Feature demos get their own section and are shown in full there (no card, no
-  // separate case study). Everything else is a card plus a case study under "Projects".
-  // The case studies are rendered as plain sections so the page works without JS; with JS
-  // (behaviors/case-study.ts) they stay hidden and open in an overlay from their card.
+  // Feature demos get their own section; everything else sits under "Projects". Both show
+  // a card, and the full write-up behind each card is a plain section in #project-details so the
+  // page works without JS. With JS (behaviors/project-overlay.ts) those sections stay hidden and
+  // open in an overlay from their card.
   const main = projects.filter((p) => p.kind !== "feature").sort(byFeatured);
   const demos = projects.filter((p) => p.kind === "feature").sort(byFeatured);
 
@@ -55,7 +54,6 @@ export const projectsSection = (projects: Project[]): string => {
         ${grid(main)}
       </div>
     </section>
-    <div id="case-studies">${main.map(projectDetail).join("")}</div>
     ${
       demos.length
         ? `<section id="feature-demos" aria-labelledby="feature-demos-title">
@@ -66,9 +64,11 @@ export const projectsSection = (projects: Project[]): string => {
           "Feature demos",
           "Standalone systems that show the kind of features I can implement in your project.",
         )}
-        <div class="demo-list">${demos.map(demoBlock).join("")}</div>
+        ${grid(demos, "View demo")}
       </div>
     </section>`
         : ""
-    }`;
+    }
+    <div id="project-details">${[...main, ...demos].map(projectDetail).join("")}</div>
+  `;
 };

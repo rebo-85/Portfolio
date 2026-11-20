@@ -9,7 +9,7 @@ const RESERVED_IDS = [
   "about",
   "projects",
   "feature-demos",
-  "case-studies",
+  "project-details",
   "work",
   "skills",
   "contact",
