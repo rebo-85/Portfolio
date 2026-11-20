@@ -6,30 +6,35 @@
 :root {
   color-scheme: dark;
 
-  /* Surfaces */
-  --bg: #0b0e12;
-  --bg-2: #10151b;
-  --surface: #151b23;
-  --surface-2: #1c2430;
-  --line: #2b3440;
-  --line-soft: #222a34;
+  /* Surfaces: neutral near-black, red is reserved for accents */
+  --bg: #060606;
+  --bg-2: #0a0a0b;
+  --surface: #101011;
+  --surface-2: #171718;
+  --line: #2b2426;
+  --line-soft: #1c1819;
 
-  /* Text */
-  --text: #eef5f8;
-  --text-dim: #a7b1bc;
-  --text-muted: #6f7b88;
+  /* Text: neutral off-white */
+  --text: #f3f0f0;
+  --text-dim: #a8a2a4;
+  --text-muted: #6f696b;
 
-  /* Accents (rgb triplets so we can do rgb(var(--x-rgb) / 0.3)) */
-  --cyan-rgb: 87 200 255;
-  --green-rgb: 123 216 143;
-  --gold-rgb: 245 193 92;
-  --red-rgb: 255 107 107;
+  /* Accents (rgb triplets so we can do rgb(var(--x-rgb) / 0.3)).
+     NOTE: the variable names are legacy (the site used to be cyan/green/gold/red).
+     They are kept so data-accent="cyan|red|gold|green" in the content files keeps working,
+     but every one of them is now a shade in the neon red family:
+       cyan  -> primary neon red     red   -> hot blood red
+       gold  -> ember orange-red     green -> neon rose */
+  --cyan-rgb: 226 29 58;
+  --green-rgb: 224 64 112;
+  --gold-rgb: 230 100 55;
+  --red-rgb: 226 56 56;
   --cyan: rgb(var(--cyan-rgb));
-  --cyan-deep: #1685a8;
+  --cyan-deep: #6e0a1b;
   --green: rgb(var(--green-rgb));
   --gold: rgb(var(--gold-rgb));
   --red: rgb(var(--red-rgb));
-  --ink: #071016;
+  --ink: #0a0103;
 
   /* The active accent. Override per block with data-accent="red|gold|cyan". */
   --accent-rgb: var(--cyan-rgb);
@@ -37,8 +42,8 @@
 
   /* Shape, depth, motion */
   --radius: 2px;
-  --shadow: 10px 10px 0 rgb(0 0 0 / 0.25);
-  --glow: 0 0 24px rgb(var(--accent-rgb) / 0.35);
+  --shadow: 10px 10px 0 rgb(0 0 0 / 0.45);
+  --glow: 0 0 22px rgb(var(--accent-rgb) / 0.3);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
@@ -52,7 +57,7 @@
    are resolved at the element that declares them, not where they are used. */
 [data-accent] {
   --accent: rgb(var(--accent-rgb));
-  --glow: 0 0 24px rgb(var(--accent-rgb) / 0.35);
+  --glow: 0 0 22px rgb(var(--accent-rgb) / 0.3);
 }
 [data-accent="cyan"] {
   --accent-rgb: var(--cyan-rgb);
@@ -134,7 +139,7 @@ section {
   padding: 6rem 0;
 }
 ::selection {
-  background: rgb(var(--cyan-rgb) / 0.35);
+  background: rgb(var(--cyan-rgb) / 0.4);
   color: #fff;
 }
 
@@ -191,9 +196,9 @@ body::before {
 body::after {
   inset: -20%;
   background:
-    radial-gradient(circle at 20% 25%, rgb(var(--cyan-rgb) / 0.12), transparent 38%),
-    radial-gradient(circle at 80% 70%, rgb(var(--red-rgb) / 0.08), transparent 40%),
-    radial-gradient(circle at 60% 10%, rgb(var(--gold-rgb) / 0.06), transparent 35%);
+    radial-gradient(circle at 20% 25%, rgb(var(--cyan-rgb) / 0.07), transparent 38%),
+    radial-gradient(circle at 80% 70%, rgb(var(--red-rgb) / 0.04), transparent 40%),
+    radial-gradient(circle at 60% 10%, rgb(var(--gold-rgb) / 0.025), transparent 35%);
   animation: aurora 28s ease-in-out infinite alternate;
 }
 
@@ -207,7 +212,7 @@ body::after {
     z-index: 50;
     transform-origin: 0 50%;
     background: linear-gradient(90deg, var(--cyan), var(--gold), var(--red));
-    box-shadow: 0 0 12px rgb(var(--cyan-rgb) / 0.7);
+    box-shadow: 0 0 8px rgb(var(--cyan-rgb) / 0.5);
     animation: progress linear both;
     animation-timeline: scroll(root block);
   }

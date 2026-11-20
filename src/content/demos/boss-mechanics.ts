@@ -1,12 +1,12 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { video } = mediaFor("boss-mechanics");
+const { video } = mediaFor("demos/boss-mechanics");
 
 export const bossMechanics: Project = {
   id: "boss-mechanics",
   category: "minecraft",
-  kind: "experiment",
+  kind: "feature",
   title: "Boss Mechanics",
   summary:
     "Script API boss behaviors and combat encounters built around precise timing, player tracking, and custom animations.",

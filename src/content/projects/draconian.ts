@@ -1,7 +1,7 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { image, video } = mediaFor("draconian");
+const { image, video } = mediaFor("projects/draconian");
 
 export const draconian: Project = {
   id: "draconian",
@@ -16,6 +16,8 @@ export const draconian: Project = {
     "Script API",
     "JavaScript",
     "Behavior pack",
+    "Combat systems",
+    "Progression systems",
     "Entity logic",
     "Custom items",
     "Shop systems",
@@ -58,10 +60,5 @@ export const draconian: Project = {
         media: video("arena-wave", "Wave arena combat"),
       },
     ],
-    youtube: {
-      kicker: "Video Demonstration",
-      id: "mdOrZldcCNc",
-      title: "Draconian Gameplay Demo",
-    },
   },
 };

@@ -1,5 +1,5 @@
 import { KINDS } from "../content/taxonomy";
-import type { Project, ProjectPanel } from "../content/types";
+import type { Media, Project, ProjectPanel } from "../content/types";
 import { head, pills, rich, rv, esc } from "./helpers";
 import { media } from "./media";
 
@@ -30,7 +30,7 @@ const projectPanel = (panel: ProjectPanel): string => `
         <div ${rv("panel")}>
           <h3>${esc(panel.title)}</h3>
           <p>${rich(panel.text)}</p>
-          <ul class="tags">${pills(panel.tags)}</ul>
+          ${panel.tags.length ? `<ul class="tags">${pills(panel.tags)}</ul>` : ""}
           <dl class="deliverables">${panel.deliverables
             .map(
               (d, i) =>
@@ -39,14 +39,32 @@ const projectPanel = (panel: ProjectPanel): string => `
             .join("")}</dl>
         </div>`;
 
-export const projectDetail = (project: Project): string => {
+/**
+ * One gallery thumbnail. Images are links to the full file (behaviors/gallery.ts turns the click
+ * into a lightbox; without JS the link just opens the image). Videos stay inline.
+ */
+const galleryItem = (m: Media, i: number): string => {
+  const frame =
+    m.type === "image"
+      ? `<a class="shot-frame shot-link" href="${esc(m.src)}" data-lightbox aria-label="View larger: ${esc(m.alt)}">${media(m)}</a>`
+      : `<div class="shot-frame">${media(m)}</div>`;
+  const caption = m.caption
+    ? `<figcaption class="shot-caption">${esc(m.caption)}</figcaption>`
+    : "";
+  return `<figure ${rv("shot", i % 3, "zoom")}>${frame}${caption}</figure>`;
+};
+
+const gallery = (list: Media[]): string =>
+  `<div class="gallery" data-gallery>${list.map(galleryItem).join("")}</div>`;
+
+/**
+ * The media-heavy part of a project's detail: clips, YouTube, panel, gallery.
+ */
+const detailBody = (project: Project): string => {
   const detail = project.detail;
   if (!detail) return "";
 
   return `
-    <section class="showcase" id="${esc(project.id)}" data-accent="${project.accent}" aria-labelledby="${esc(project.id)}-title">
-      <div class="wrap">${head(project.id, detail.kicker ?? `${KINDS[project.kind].label} case study`, project.title, detail.intro)}
-        <ul ${rv("tags", 3)}>${pills(project.tags)}</ul>
         ${
           detail.clips?.length
             ? `<div class="subhead">
@@ -57,16 +75,20 @@ export const projectDetail = (project: Project): string => {
         }
         ${detail.youtube ? youtube(detail.youtube) : ""}
         ${detail.panel ? projectPanel(detail.panel) : ""}
-        ${
-          detail.gallery?.length
-            ? `<div class="gallery">${detail.gallery
-                .map(
-                  (m, i) =>
-                    `<figure ${rv("shot", i, i % 2 ? "right" : "left")}>${media(m)}</figure>`,
-                )
-                .join("")}</div>`
-            : ""
-        }
+        ${detail.gallery?.length ? gallery(detail.gallery) : ""}`;
+};
+
+/**
+ * Full-width write-up for a project or feature demo. It is hidden until opened from its card
+ * (see behaviors/project-overlay.ts). Tags live on the card, so they are not repeated here.
+ */
+export const projectDetail = (project: Project): string => {
+  const detail = project.detail;
+  if (!detail) return "";
+
+  return `
+    <section class="showcase" id="${esc(project.id)}" data-accent="${project.accent}" aria-labelledby="${esc(project.id)}-title">
+      <div class="wrap">${head(project.id, detail.kicker ?? (project.kind === "feature" ? "Feature demo" : KINDS[project.kind].label), project.title, detail.intro)}${detailBody(project)}
       </div>
     </section>`;
 };

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Usage: scripts/optimize-media.sh <project-id|site> <input.mov>
-#   -> public/media/<project-id>/<name>.mp4 + <name>-poster.webp (720p, no audio, web-ready)
-# <project-id> must match the `id` of the project in src/content/projects/ ("site" = site-wide assets).
+# Usage: scripts/optimize-media.sh <projects/id|demos/id|site> <input.mov>
+#   -> public/media/<folder>/<name>.mp4 + <name>-poster.webp (720p, no audio, web-ready)
+# <folder> is "projects/<id>" or "demos/<id>" (the id of the project in src/content/), or "site" for site-wide assets.
 set -euo pipefail
-folder="${1:?Usage: optimize-media.sh <project-id|site> <input>}"
-in="${2:?Usage: optimize-media.sh <project-id|site> <input>}"
+folder="${1:?Usage: optimize-media.sh <projects/id|demos/id|site> <input>}"
+in="${2:?Usage: optimize-media.sh <projects/id|demos/id|site> <input>}"
 [ -f "$in" ] || { echo "Not a file: $in" >&2; exit 1; }
 command -v ffmpeg >/dev/null || { echo "ffmpeg not found on PATH." >&2; exit 1; }
 

@@ -1,12 +1,12 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { video } = mediaFor("custom-spells");
+const { video } = mediaFor("demos/custom-spells");
 
 export const customSpells: Project = {
   id: "custom-spells",
   category: "minecraft",
-  kind: "experiment",
+  kind: "feature",
   title: "Custom Spells",
   summary:
     "Script API-driven magical abilities with custom area effects, timing, and synchronized particle behavior.",

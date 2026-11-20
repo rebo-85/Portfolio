@@ -10,6 +10,8 @@ export interface Media {
   src: string;
   alt: string;
   poster?: string;
+  /** Optional label. Shown under a gallery thumbnail and in the lightbox (falls back to `alt`). */
+  caption?: string;
 }
 
 export interface Clip {
@@ -34,7 +36,7 @@ export interface ProjectPanel {
 }
 
 export interface Project {
-  /** Unique, URL-safe. Also the name of the media folder: public/media/<id>/ */
+  /** Unique, URL-safe. Also the last part of the media folder: public/media/<projects|demos>/<id>/ */
   id: string;
   category: Category;
   kind: ProjectKind;

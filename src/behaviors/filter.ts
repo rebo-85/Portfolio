@@ -1,10 +1,12 @@
-// Filters are hidden in the server-rendered markup, so no-JS visitors see every card.
-// Each group (category, kind) narrows the cards independently; a card must match all active groups.
+// Filters are hidden in the server-rendered markup, so no-JS visitors see everything.
+// Each group (category, kind) narrows the items independently; an item must match all active groups.
+// Items are the project cards, in both the Projects and Feature demos sections.
 export function initFilter(): void {
   const bar = document.querySelector<HTMLElement>("[data-filter-bar]");
   if (!bar) return;
 
   const cards = document.querySelectorAll<HTMLElement>(".project-card");
+  const groups = document.querySelectorAll<HTMLElement>("[data-kind-group]");
   const active: Record<string, string> = {};
   bar.hidden = false;
 
@@ -24,6 +26,11 @@ export function initFilter(): void {
       card.hidden = Object.entries(active).some(
         ([key, value]) => value !== "all" && card.dataset[key] !== value,
       );
+    });
+
+    // Don't leave a group heading standing over an empty grid.
+    groups.forEach((group) => {
+      group.hidden = !group.querySelector(".project-card:not([hidden])");
     });
   });
 }

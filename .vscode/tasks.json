@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Portfolio: new project or demo",
+      "type": "shell",
+      "command": "node scripts/new-project.mjs",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true, "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Portfolio: new project",
+      "type": "shell",
+      "command": "node scripts/new-project.mjs project",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true, "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Portfolio: new demo",
+      "type": "shell",
+      "command": "node scripts/new-project.mjs demo",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true, "panel": "dedicated", "clear": true }
+    }
+  ]
+}

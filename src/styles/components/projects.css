@@ -47,6 +47,28 @@
   display: none;
 }
 
+/* Kind groups inside the Projects section (Commercial, Solo, ...). */
+.kind-group[hidden] {
+  display: none;
+}
+.kind-group + .kind-group {
+  margin-top: 16px;
+}
+.kind-head {
+  margin: 0 0 24px;
+}
+.kind-group + .kind-group .kind-head {
+  margin-top: 48px;
+}
+.kind-title {
+  margin-bottom: 8px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.kind-head .section-copy {
+  font-size: 0.98rem;
+}
+
 /* Accent bands: showcases recolour themselves, and a few plain sections get an accent too. */
 .showcase {
   border-top: 1px solid rgb(var(--accent-rgb) / 0.25);

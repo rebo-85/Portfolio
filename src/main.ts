@@ -1,7 +1,9 @@
 import "./styles/base.css";
 import "./styles/components.css";
+import { initProjectOverlay } from "./behaviors/project-overlay";
 import { initCopy } from "./behaviors/copy";
 import { initFilter } from "./behaviors/filter";
+import { initGallery } from "./behaviors/gallery";
 import { initHotbar } from "./behaviors/hotbar";
 import { initNav } from "./behaviors/nav";
 import { initReveal } from "./behaviors/reveal";
@@ -23,5 +25,7 @@ initReveal();
 initHotbar();
 initNav();
 initFilter();
+initProjectOverlay();
+initGallery();
 initYouTube();
 initCopy();

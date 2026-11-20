@@ -1,14 +1,17 @@
 import type { Project } from "../types";
-import { battleChallenges } from "./battle-challenges";
-import { bossMechanics } from "./boss-mechanics";
-import { customSpells } from "./custom-spells";
 import { draconian } from "./draconian";
-import { windArmorPack } from "./wind-armor-pack";
+import { itemPhysics } from "./item-physics";
+import { AIPlayers } from "./rb-ai-players";
+import { survivalEssenstials } from "./survival-essenstials";
+import { betterStructures } from "./better-structures";
+import { biomeCraft } from "./biome-craft";
 
+/** Portfolio projects: shipped or client work. Display order = array order. */
 export const projects: Project[] = [
   draconian,
-  customSpells,
-  bossMechanics,
-  battleChallenges,
-  windArmorPack,
+  itemPhysics,
+  AIPlayers,
+  survivalEssenstials,
+  betterStructures,
+  biomeCraft,
 ];

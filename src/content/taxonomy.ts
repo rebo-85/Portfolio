@@ -12,12 +12,32 @@ export const CATEGORIES = {
   tools: { label: "Tools", order: 2 },
 } as const;
 
-/** How the project came to be. Shown on the card and drives the second filter row. */
+/** How the project came to be. Shown on the card; `heading` and `blurb` title its group in the Projects section. */
 export const KINDS = {
-  commercial: { label: "Commercial", order: 0 },
-  solo: { label: "Solo release", order: 1 },
-  experiment: { label: "Experiment", order: 2 },
-  contract: { label: "Contract", order: 3 },
+  commercial: {
+    label: "Commercial",
+    order: 0,
+    heading: "Commercial work",
+    blurb: "Add-ons built for commercial release or for paying clients.",
+  },
+  solo: {
+    label: "Solo release",
+    order: 1,
+    heading: "Solo releases",
+    blurb: "Personal projects I designed, built and released myself.",
+  },
+  feature: {
+    label: "Feature demo",
+    order: 2,
+    heading: "Feature demos",
+    blurb: "Standalone systems that show what I can build for your project.",
+  },
+  contract: {
+    label: "Contract",
+    order: 3,
+    heading: "Contract work",
+    blurb: "Work-for-hire built to a client's brief.",
+  },
 } as const;
 
 export const LINK_KINDS = {
