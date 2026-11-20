@@ -24,9 +24,12 @@
   .hero {
     padding: 56px 0 48px;
   }
-  .deliverables,
-  .gallery {
+  .deliverables {
     grid-template-columns: 1fr;
+  }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   .hotbar {
     grid-template-columns: repeat(3, 1fr);

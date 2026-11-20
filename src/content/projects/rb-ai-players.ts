@@ -1,13 +1,13 @@
 import { mediaFor } from "../media";
 import type { Project } from "../types";
 
-const { image, video } = mediaFor("projects/ai-players");
+const { image, video } = mediaFor("projects/rb-ai-players");
 
 export const AIPlayers: Project = {
-  id: "ai-players",
+  id: "rb-ai-players",
   category: "minecraft",
   kind: "solo",
-  title: "AI Players",
+  title: "RB AI Players",
   summary: "Custom AI behavior for Minecraft Bedrock entities.",
   year: 2026,
   status: "released",

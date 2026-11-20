@@ -11,17 +11,7 @@ export const survivalEssenstials: Project = {
   summary:
     "Amplify your survival experience with new mobs, custom blocks, and epic expansions. Face down powerful bosses, gear up with fresh tools and armor, and explore dungeons teeming with treasure!",
   accent: "cyan",
-  tags: [
-    "Script API",
-    "JavaScript",
-    "Behavior pack",
-    "Mobs",
-    "Cosmetics",
-    "Survival",
-    "Vanilla+",
-    "Weapons & Armor",
-    "Vanilla+",
-  ],
+  tags: ["Behavior pack", "Mobs", "Cosmetics", "Survival", "Weapons & Armor", "Vanilla+"],
   cover: image("cover.avif", "Survival Essentials cover image"),
   // featured: true,
   detail: {

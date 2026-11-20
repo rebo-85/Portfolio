@@ -1,6 +1,6 @@
-import { CATEGORIES, sortedKeys } from "../../content/taxonomy";
+import { CATEGORIES, KINDS, sortedKeys } from "../../content/taxonomy";
 import type { Project } from "../../content/types";
-import { head } from "../helpers";
+import { esc, head, rv } from "../helpers";
 import { projectCard } from "../project-card";
 import { projectDetail } from "../project-detail";
 
@@ -27,6 +27,28 @@ const filterGroup = <K extends string>(
 const byFeatured = (a: Project, b: Project): number =>
   Number(Boolean(b.featured)) - Number(Boolean(a.featured));
 
+/**
+ * The Projects section is split into one titled group per kind (Commercial, Solo, ...).
+ * Kinds with no projects are skipped, so a new kind shows up as soon as one project uses it.
+ * "feature" is excluded here: demos have their own section below.
+ */
+const kindGroups = (list: Project[]): string =>
+  sortedKeys(KINDS)
+    .filter((kind) => kind !== "feature")
+    .map((kind) => ({ kind, items: list.filter((p) => p.kind === kind) }))
+    .filter((group) => group.items.length)
+    .map(
+      ({ kind, items }) => `
+        <div class="kind-group" data-kind-group="${kind}" role="group" aria-labelledby="kind-${kind}-title">
+          <div class="subhead kind-head">
+            <h3 ${rv("kind-title", 0)} id="kind-${kind}-title">${esc(KINDS[kind].heading)}</h3>
+            <p ${rv("section-copy", 1)}>${esc(KINDS[kind].blurb)}</p>
+          </div>
+          ${grid(items)}
+        </div>`,
+    )
+    .join("");
+
 const grid = (list: Project[], cta?: string): string =>
   `<div class="clip-grid project-grid">${list.map((project, i) => projectCard(project, i, cta)).join("")}</div>`;
 
@@ -38,7 +60,7 @@ export const projectsSection = (projects: Project[]): string => {
   const main = projects.filter((p) => p.kind !== "feature").sort(byFeatured);
   const demos = projects.filter((p) => p.kind === "feature").sort(byFeatured);
 
-  // Only the category filter is shown: the kind split is now the two sections.
+  // Only the category filter is shown: the kind split is now the titled groups (and the demos section).
   const filters = filterGroup(
     "category",
     "Filter by category",
@@ -51,7 +73,7 @@ export const projectsSection = (projects: Project[]): string => {
       <div class="wrap">
         ${head("projects", "Selected projects", "Projects")}
         ${filters ? `<div class="filter-bar" data-filter-bar hidden>${filters}</div>` : ""}
-        ${grid(main)}
+        ${kindGroups(main)}
       </div>
     </section>
     ${

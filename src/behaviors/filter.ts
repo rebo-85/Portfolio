@@ -6,6 +6,7 @@ export function initFilter(): void {
   if (!bar) return;
 
   const cards = document.querySelectorAll<HTMLElement>(".project-card");
+  const groups = document.querySelectorAll<HTMLElement>("[data-kind-group]");
   const active: Record<string, string> = {};
   bar.hidden = false;
 
@@ -25,6 +26,11 @@ export function initFilter(): void {
       card.hidden = Object.entries(active).some(
         ([key, value]) => value !== "all" && card.dataset[key] !== value,
       );
+    });
+
+    // Don't leave a group heading standing over an empty grid.
+    groups.forEach((group) => {
+      group.hidden = !group.querySelector(".project-card:not([hidden])");
     });
   });
 }

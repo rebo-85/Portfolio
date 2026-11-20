@@ -172,7 +172,7 @@ All optional except `intro`. Sections render in this order:
 2. `clipsKicker`, `clipsIntro`, `clips[]` — grid of `{ title, text, media }`
 3. `youtube` — `{ id, title, kicker? }`, a click-to-load video (only the video ID is needed)
 4. `panel` — `{ title, text, tags, deliverables[] }`, a labelled breakdown
-5. `gallery` — list of media shown as figures
+5. `gallery` — list of media shown as a thumbnail grid. Images open in a lightbox (prev/next, arrow keys, swipe); give any item a label with `image(file, alt, caption)`. Videos stay inline
 
 ### Change the taxonomy
 

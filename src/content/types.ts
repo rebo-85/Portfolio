@@ -10,6 +10,8 @@ export interface Media {
   src: string;
   alt: string;
   poster?: string;
+  /** Optional label. Shown under a gallery thumbnail and in the lightbox (falls back to `alt`). */
+  caption?: string;
 }
 
 export interface Clip {

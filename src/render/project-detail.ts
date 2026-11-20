@@ -1,5 +1,5 @@
 import { KINDS } from "../content/taxonomy";
-import type { Project, ProjectPanel } from "../content/types";
+import type { Media, Project, ProjectPanel } from "../content/types";
 import { head, pills, rich, rv, esc } from "./helpers";
 import { media } from "./media";
 
@@ -40,6 +40,24 @@ const projectPanel = (panel: ProjectPanel): string => `
         </div>`;
 
 /**
+ * One gallery thumbnail. Images are links to the full file (behaviors/gallery.ts turns the click
+ * into a lightbox; without JS the link just opens the image). Videos stay inline.
+ */
+const galleryItem = (m: Media, i: number): string => {
+  const frame =
+    m.type === "image"
+      ? `<a class="shot-frame shot-link" href="${esc(m.src)}" data-lightbox aria-label="View larger: ${esc(m.alt)}">${media(m)}</a>`
+      : `<div class="shot-frame">${media(m)}</div>`;
+  const caption = m.caption
+    ? `<figcaption class="shot-caption">${esc(m.caption)}</figcaption>`
+    : "";
+  return `<figure ${rv("shot", i % 3, "zoom")}>${frame}${caption}</figure>`;
+};
+
+const gallery = (list: Media[]): string =>
+  `<div class="gallery" data-gallery>${list.map(galleryItem).join("")}</div>`;
+
+/**
  * The media-heavy part of a project's detail: clips, YouTube, panel, gallery.
  */
 const detailBody = (project: Project): string => {
@@ -57,16 +75,7 @@ const detailBody = (project: Project): string => {
         }
         ${detail.youtube ? youtube(detail.youtube) : ""}
         ${detail.panel ? projectPanel(detail.panel) : ""}
-        ${
-          detail.gallery?.length
-            ? `<div class="gallery">${detail.gallery
-                .map(
-                  (m, i) =>
-                    `<figure ${rv("shot", i, i % 2 ? "right" : "left")}>${media(m)}</figure>`,
-                )
-                .join("")}</div>`
-            : ""
-        }`;
+        ${detail.gallery?.length ? gallery(detail.gallery) : ""}`;
 };
 
 /**
